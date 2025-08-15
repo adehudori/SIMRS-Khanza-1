@@ -385,6 +385,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         LTotal = new widget.Label();
         jLabel7 = new widget.Label();
         LTotalTagihan = new widget.Label();
+        lblTemplate = new widget.Label();
+        ChkTemplate = new widget.CekBox();
+        NamaTemplate = new widget.TextBox();
+        Plan = new widget.TextArea();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbResep = new widget.Table();
@@ -607,7 +611,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_END);
 
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(440, 107));
+        FormInput.setPreferredSize(new java.awt.Dimension(440, 130));
         FormInput.setLayout(null);
 
         TNoRw.setHighlighter(null);
@@ -691,7 +695,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-02-2025" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-08-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -795,6 +799,45 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         LTotalTagihan.setPreferredSize(new java.awt.Dimension(80, 23));
         FormInput.add(LTotalTagihan);
         LTotalTagihan.setBounds(588, 42, 95, 23);
+
+        lblTemplate.setText("Jadikan Template Resep:");
+        lblTemplate.setName("lblTemplate"); // NOI18N
+        FormInput.add(lblTemplate);
+        lblTemplate.setBounds(10, 100, 130, 23);
+
+        ChkTemplate.setBorder(null);
+        ChkTemplate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkTemplate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkTemplate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkTemplate.setName("ChkTemplate"); // NOI18N
+        ChkTemplate.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkTemplateItemStateChanged(evt);
+            }
+        });
+        ChkTemplate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkTemplateActionPerformed(evt);
+            }
+        });
+        FormInput.add(ChkTemplate);
+        ChkTemplate.setBounds(140, 100, 23, 23);
+
+        NamaTemplate.setHighlighter(null);
+        NamaTemplate.setName("NamaTemplate"); // NOI18N
+        NamaTemplate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NamaTemplateKeyPressed(evt);
+            }
+        });
+        FormInput.add(NamaTemplate);
+        NamaTemplate.setBounds(170, 100, 500, 23);
+
+        Plan.setColumns(20);
+        Plan.setRows(5);
+        Plan.setName("Plan"); // NOI18N
+        FormInput.add(Plan);
+        Plan.setBounds(700, 10, 170, 110);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1060,6 +1103,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
                         })==true){
                             simpandata();
+                            SimpanTemplateResep();
                     }else{
                         emptTeksobat();
                         if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
@@ -1067,6 +1111,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
                             })==true){
                                 simpandata();
+                                SimpanTemplateResep();
                         }else{
                             emptTeksobat();
                             if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
@@ -1074,6 +1119,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
                                 })==true){
                                     simpandata();
+                                    SimpanTemplateResep();
                             }else{
                                 emptTeksobat();
                                 sukses=false;
@@ -1519,6 +1565,23 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             
     }//GEN-LAST:event_DTPBeriItemStateChanged
 
+    private void ChkTemplateItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkTemplateItemStateChanged
+        if (ChkTemplate.isSelected() == true){
+            NamaTemplate.setVisible(true);
+            lblTemplate.setVisible(true);
+        }else {
+            NamaTemplate.setVisible(false);
+        }
+    }//GEN-LAST:event_ChkTemplateItemStateChanged
+
+    private void ChkTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkTemplateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChkTemplateActionPerformed
+
+    private void NamaTemplateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaTemplateKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NamaTemplateKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1546,6 +1609,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Button BtnTambah1;
     private widget.CekBox ChkJln;
     private widget.CekBox ChkRM;
+    private widget.CekBox ChkTemplate;
     private widget.Tanggal DTPBeri;
     private widget.PanelBiasa FormInput;
     private widget.ComboBox Jeniskelas;
@@ -1554,8 +1618,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Label LPpn;
     private widget.Label LTotal;
     private widget.Label LTotalTagihan;
+    private widget.TextBox NamaTemplate;
     private widget.TextBox NmDokter;
     private widget.TextBox NoResep;
+    private widget.TextArea Plan;
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
@@ -1579,6 +1645,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JPanel jPanel3;
     private widget.Label label12;
     private widget.Label label9;
+    private widget.Label lblTemplate;
     private widget.panelisi panelisi3;
     private javax.swing.JMenuItem ppBersihkan;
     private javax.swing.JMenuItem ppStok1;
@@ -4168,4 +4235,33 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             }
         }               
     }
+    
+    private void SimpanTemplateResep(){
+        if (ChkTemplate.isSelected() == true) {
+                    if (!NamaTemplate.getText().equals("")) {
+                        if (Sequel.menyimpantf("resep_obat_template", "?,?,?", "No.Resep", 3,
+                                new String[]{NoResep.getText(), status, NamaTemplate.getText()}) == true) {
+                            JOptionPane.showMessageDialog(rootPane, "Template Resep Berhasil Di Simpan!");
+                           //noresepuntuktemplate = "";
+                        }
+
+                    }
+                }
+    }
+    
+
+    public void setNoRmTemplate(String norwt,String KodeDokter,String NamaDokter,String kodepj,String status) {        
+        TNoRw.setText(norwt);
+        Sequel.cariIsi("select concat(pasien.no_rkm_medis,' ',pasien.nm_pasien,' (',pasien.umur,')') from reg_periksa inner join pasien "+
+                    " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where no_rawat=? ",TPasien,TNoRw.getText());
+        KdDokter.setText(KodeDokter);
+        NmDokter.setText(NamaDokter);
+        KdPj.setText(kodepj);
+        TCari.requestFocus();
+        this.status=status;
+        SetHarga();
+        ubah=false;
+        copy=false;
+    }
+    
 }

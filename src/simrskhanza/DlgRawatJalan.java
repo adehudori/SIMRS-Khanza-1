@@ -25,6 +25,7 @@ import fungsi.akses;
 import inventory.DlgCariObat;
 import inventory.DlgCopyResep;
 import inventory.DlgPeresepanDokter;
+import inventory.DlgTemplateResep;
 import inventory.InventoryResepLuar;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -3679,6 +3680,25 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnRiwayatActionPerformed(evt);
+            }
+        });
+        
+        BtnTemplateResep = new widget.Button();
+        BtnTemplateResep.setForeground(new java.awt.Color(0, 0, 0));
+        BtnTemplateResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnTemplateResep.setMnemonic('4');
+        BtnTemplateResep.setText("Template Resep");
+        BtnTemplateResep.setToolTipText("");
+        BtnTemplateResep.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnTemplateResep.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnTemplateResep.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnTemplateResep.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnTemplateResep.setName("BtnTemplateResep"); // NOI18N
+        BtnTemplateResep.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnTemplateResep.setRoundRect(false);
+        BtnTemplateResep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemplateResepActionPerformed(evt);
             }
         });
 
@@ -10752,7 +10772,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbTindakan3;
     private widget.TextBox TanggalRegistrasi;
     // End of variables declaration//GEN-END:variables
-    private widget.Button BtnSkorBromagePascaAnestesi,BtnPenilaianPreInduksi,BtnHasilPemeriksaanUSGUrologi,BtnHasilPemeriksaanUSGGynecologi,BtnHasilPemeriksaanEKG,BtnPenatalaksanaanTerapiOkupasi,BtnPenilaianPsikolog,
+    private widget.Button BtnTemplateResep,BtnSkorBromagePascaAnestesi,BtnPenilaianPreInduksi,BtnHasilPemeriksaanUSGUrologi,BtnHasilPemeriksaanUSGGynecologi,BtnHasilPemeriksaanEKG,BtnPenatalaksanaanTerapiOkupasi,BtnPenilaianPsikolog,
                           BtnHasilPemeriksaanUSGNeonatus,BtnHasilEndoskopiFaringLaring,BtnHasilEndoskopiHidung,BtnHasilEndoskopiTelinga,BtnPenilaianPasienImunitasRendah,BtnCatatanKeseimbanganCairan,BtnCatatanObservasiCHBP,
                           BtnCatatanObservasiInduksiPersalinan,BtnPermintaanKonsultasiMedik,BtnSkriningMerokokUsiaRemaja,BtnSkriningKekerasanPadaWanita,BtnSkriningObesitas,BtnSkriningRisikoKankerPayudara,BtnSkriningRisikoKankerParu,
                           BtnSkriningKesehatanGigiMulutremaja,BtnSkriningTBC,BtnCatatanAnastesiSedasi,BtnSkriningPUMA,BtnSkriningAdiksiNikotin,BtnSkriningThalassemia,BtnSkriningInstrumenSDQ,BtnSkriningInstrumenSRQ,
@@ -13679,6 +13699,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnRiwayat);
         FormMenu.add(BtnResepObat);
         FormMenu.add(BtnCopyResep);
+        FormMenu.add(BtnTemplateResep);
         FormMenu.add(BtnResepLuar);
         FormMenu.add(BtnInputObat);
         FormMenu.add(BtnObatBhp);
@@ -14045,4 +14066,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 break;
         } 
     }
+    
+    private void BtnTemplateResepActionPerformed(java.awt.event.ActionEvent evt) {
+        if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgTemplateResep template = new DlgTemplateResep(null, false);
+            template.isCek();
+            template.setRM(TNoRw.getText(), TNoRM.getText(), KdDok.getText(), kd_pj, "ralan");
+            template.tampil();
+            template.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            template.setLocationRelativeTo(internalFrame1);
+            template.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+  
+
 }
